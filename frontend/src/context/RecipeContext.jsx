@@ -11,7 +11,7 @@ const RecipeProvider = ({ children }) => {
   const [selectedSectionRecipe, setSelectedSectionRecipe] = useState(null);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
-  const backendUrl = 'http://localhost:4000';
+  const backendUrl = 'https://rezeptbuchlogin-api.onrender.com';
 
   useEffect(() => {
     fetchRecipes();

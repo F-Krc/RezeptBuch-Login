@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  const backendUrl = 'http://localhost:4000';
+  const backendUrl = 'https://rezeptbuchlogin-api.onrender.com';
 
   useEffect(() => {
     const storedUserToken = localStorage.getItem('userToken');
