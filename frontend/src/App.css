@@ -246,6 +246,9 @@ body {
   .login-container,
   .register-container,
   .recipe {
-    width: 420px;
+    width: 410px;
+  }
+  .recipe {
+    width: 390px;
   }
 }
