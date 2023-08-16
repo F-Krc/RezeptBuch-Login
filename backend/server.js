@@ -1,0 +1,25 @@
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import 'dotenv/config';
+import { connectMongoose } from './util/connectMongoose.js';
+import recipeRouter from './routes/recipeRoutes.js';
+import userRouter from './routes/userRouter.js';
+
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+app.use(cookieParser());
+const PORT = process.env.PORT || 3000;
+
+app.use(recipeRouter)
+app.use(userRouter)
+
+if (await connectMongoose()) {
+  app.listen(PORT, () => {
+    console.log(`Verbunden an Port ${PORT}`);
+  });
+} else {
+  console.error('Verbindung zu mongodb nicht möglich.');
+}
