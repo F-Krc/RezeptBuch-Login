@@ -10,14 +10,11 @@ body {
   background-color: lightgray;
 }
 
-
-
 .container {
   width: 800px;
-  height: 800px;
+  height: 100vh;
   margin: 0 auto;
 }
-
 
 .navbar {
   background-color: #333;
@@ -81,7 +78,6 @@ body {
   background-color: #555;
 }
 
-/* RecipeList bileşeni stil kuralları */
 .recipe-list {
   width: 100%;
   margin-top: 20px;
@@ -108,7 +104,6 @@ body {
 .recipe-list a:hover {
   text-decoration: underline;
 }
-
 
 .search-bar {
   width: 100%;
@@ -137,7 +132,6 @@ body {
   background-color: #555;
 }
 
-/* Login ve Register bileşenleri stil kuralları */
 .login-container,
 .register-container {
   width: 100%;
@@ -212,7 +206,6 @@ body {
   font-weight: bold;
 }
 
-/* Tarif detayı (Recipe) bileşeni stil kuralları */
 .recipe {
   width: 100%;
   margin: 10px;
@@ -245,7 +238,7 @@ body {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 400px) {
   .container,
   .recipe-form,
   .recipe-list,
@@ -253,6 +246,6 @@ body {
   .login-container,
   .register-container,
   .recipe {
-    max-width: 50%;
+    width: 390px;
   }
 }
