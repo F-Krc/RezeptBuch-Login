@@ -253,6 +253,6 @@ body {
   .login-container,
   .register-container,
   .recipe {
-    max-width: 90%;
+    max-width: 50%;
   }
 }
