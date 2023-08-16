@@ -238,7 +238,7 @@ body {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 468px) {
   .container,
   .recipe-form,
   .recipe-list,
@@ -246,6 +246,6 @@ body {
   .login-container,
   .register-container,
   .recipe {
-    width: 390px;
+    width: 420px;
   }
 }
