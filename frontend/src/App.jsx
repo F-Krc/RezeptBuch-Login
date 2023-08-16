@@ -29,18 +29,18 @@ const App = () => {
               </li>
             )}
             {isLoggedIn ? (
-              <li className="nav-item">Welcome {loggedInUser}</li>
+              <li className="nav-item">{loggedInUser}</li>
             ) : (
               <li className="nav-item">
                 <Link to="/users/register" className="nav-link">
-                  Register
+                  Registrieren
                 </Link>
               </li>
             )}
 
             <li className="nav-item">
               <Link to="/users/login" className="nav-link">
-                {isLoggedIn ? 'Logout' : 'Login'}
+                {isLoggedIn ? 'Ausloggen' : 'Anmeldung'}
               </Link>
             </li>
           </ul>

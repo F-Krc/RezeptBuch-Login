@@ -30,7 +30,7 @@ function Register() {
 
   return (
     <div className="register-container">
-      <h2>Register</h2>
+      <h2>Registrieren</h2>
       <form onSubmit={handleSubmit} className="register-form">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
@@ -38,7 +38,7 @@ function Register() {
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
         <br />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Passwort</label>
         <input
           type="password"
           id="password"
@@ -48,11 +48,11 @@ function Register() {
           required
         />
         <br />
-        <button type="submit">Send</button>
+        <button type="submit">Senden</button>
       </form>
       <div className="register-ask-container">
         <span>Du hast schon einen Account?</span>
-        <Link to="/users/login">Login</Link>
+        <Link to="/users/login">Anmeldung</Link>
       </div>
       {successMessage && <p className="success-message">{successMessage}</p>}
     </div>

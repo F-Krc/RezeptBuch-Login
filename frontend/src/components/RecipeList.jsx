@@ -10,7 +10,7 @@ const RecipeList = () => {
       <>
         <h2>Rezeptliste</h2>
         {recipes.length === 0 ? (
-          <div>No recipes available.</div>
+          <div>Keine Rezepte verfügbar.</div>
         ) : (
           <ul>
             {recipes.map((recipe, index) => (

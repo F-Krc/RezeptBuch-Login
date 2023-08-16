@@ -34,19 +34,19 @@ function Login() {
     } catch (error) {
       console.log(error);
       setLoginSuccess(false);
-      setLoginError('Invalid email or password');
+      setLoginError('Ungültige E-Mail oder Passwort');
     }
     setFormData(initialForm);
   };
 
   return (
     <div className="login-container">
-      <h2> {isLoggedIn ? 'Logout' : 'Login'}</h2>
+      <h2> {isLoggedIn ? 'Ausloggen' : 'Anmeldung'}</h2>
       {isLoggedIn ? (
         <div>
-          <p>Login successful! Welcome {loggedInUser}</p>
+          <p>Anmeldung erfolgreich! Willkommen {loggedInUser}</p>
           <br />
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout}>Ausloggen</button>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
@@ -61,7 +61,7 @@ function Login() {
             autoComplete="username"
           />
           <br />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Passwort</label>
           <input
             type="password"
             id="password"
@@ -72,7 +72,7 @@ function Login() {
             autoComplete="current-password"
           />
           <br />
-          <button type="submit">Send</button>
+          <button type="submit">Senden</button>
           {loginError && <p className="error-message">{loginError}</p>}
         </form>
       )}
