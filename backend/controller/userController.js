@@ -20,17 +20,15 @@ export async function createUserController(req, res) {
 export async function loginUserController(req, res) {
   try {
     const user = await userModel.findOne({ email: req.body.email });
-    //console.log('logged user', user);
+    console.log('logged user', user);
 
     if (user) {
       const isMatching = await bcrypt.compare(req.body.password, user.password);
       if (isMatching) {
         const token = await createToken({ customerId: user.customerId, userId: user._id }, { expiresIn: '1h' });
-        // console.log(token);
-        return res
-          .status(200)
-          .cookie('accessToken', token, { httpOnly: true, domain: 'localhost', secure: true })
-          .send(user);
+       // console.log(token);
+        const updatedUser = { ...user, token:token}
+        return res.status(200).cookie('accessToken', token, { httpOnly: true, domain:"localhost", secure:true }).send(updatedUser);
       }
       return res.status(404).json({ msg: 'User not found!' });
     }
@@ -42,8 +40,8 @@ export async function loginUserController(req, res) {
 }
 
 export const getUserController = async (req, res) => {
-  const userId = req.params.id;
-  // console.log('User ID:', userId);
+  const userId = req.params.id
+ // console.log('User ID:', userId);
 
   try {
     const user = await userModel.findById(userId);
@@ -57,3 +55,4 @@ export const getUserController = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
