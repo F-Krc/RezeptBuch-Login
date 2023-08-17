@@ -1,9 +1,10 @@
 import { validateToken } from '../lib/auth.js';
 
 export const authMiddleware = async (req, res, next) => {
-  const headers = req.headers;
+  //const headers = req.headers;
  // console.log(headers)
-  const authorization = headers.authorization;
+  const authorization = req.cookies.accessToken;
+  //console.log(req.cookies.accessToken);
 
   if (!authorization) {
     console.log('No authorization header');

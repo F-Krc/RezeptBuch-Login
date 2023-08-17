@@ -5,20 +5,12 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userToken, setUserToken] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
   const backendUrl = 'https://rezeptbuchlogin-api.onrender.com';
 
   useEffect(() => {
-    const storedUserToken = localStorage.getItem('userToken');
     const storedLoggedInUser = localStorage.getItem('loggedInUser');
-
-    if (storedUserToken) {
-      setUserToken(storedUserToken);
-      setIsLoggedIn(true);
-      axios.defaults.headers.common['Authorization'] = storedUserToken;
-    }
 
     if (storedLoggedInUser) {
       setLoggedInUser(JSON.parse(storedLoggedInUser));
@@ -27,7 +19,7 @@ const UserProvider = ({ children }) => {
 
   const createUser = async (formData) => {
     try {
-      const response = await axios.post(`${backendUrl}/users/register`, formData);
+      const response = await axios.post(`${backendUrl}/users/register`, formData, { withCredentials: true });
       //console.log('res', response.data);
     } catch (error) {
       console.log(error);
@@ -36,11 +28,8 @@ const UserProvider = ({ children }) => {
 
   const loginUser = async (formData) => {
     try {
-      const response = await axios.post(`${backendUrl}/users/login`, formData);
-      const userToken = response.data.token;
-      localStorage.setItem('userToken', userToken);
-      setUserToken(userToken);
-
+      const response = await axios.post(`${backendUrl}/users/login`, formData, { withCredentials: true });
+  
       const userData = response.data._doc.name;
       localStorage.setItem('loggedInUser', JSON.stringify(userData));
 
@@ -53,7 +42,6 @@ const UserProvider = ({ children }) => {
   const logoutUser = () => {
     setUserToken(null);
     setIsLoggedIn(false);
-    localStorage.removeItem('userToken');
     localStorage.removeItem('loggedInUser');
   };
 
@@ -64,7 +52,6 @@ const UserProvider = ({ children }) => {
         loginUser,
         isLoggedIn,
         setIsLoggedIn,
-        userToken,
         logoutUser,
         loggedInUser,
       }}
