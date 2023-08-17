@@ -1,11 +1,11 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-
+import { UserContext } from './UserContext';
 
 export const RecipeContext = createContext();
 
 const RecipeProvider = ({ children }) => {
-
+  const userContext = useContext(UserContext);
   const [recipes, setRecipes] = useState([]);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [selectedSectionRecipe, setSelectedSectionRecipe] = useState(null);
@@ -17,7 +17,11 @@ const RecipeProvider = ({ children }) => {
     fetchRecipes();
   }, []);
 
-
+  useEffect(() => {
+    if (userContext.userToken) {
+      axios.defaults.headers.common['Authorization'] = userContext.userToken;
+    }
+  }, [userContext.userToken]);
 
   const fetchRecipes = async () => {
     try {
@@ -31,7 +35,9 @@ const RecipeProvider = ({ children }) => {
   const createRecipe = async (recipeData) => {
     try {
       const response = await axios.post(`${backendUrl}/recipes`, recipeData, {
-         withCredentials: true 
+        headers: {
+          Authorization: userContext.userToken,
+        },
       });
       setRecipes((prevRecipes) => [...prevRecipes, response.data]);
     } catch (error) {
@@ -42,7 +48,9 @@ const RecipeProvider = ({ children }) => {
   const deleteRecipe = async (recipeId) => {
     try {
       await axios.delete(`${backendUrl}/recipes/${recipeId}`, {
-        withCredentials: true,
+        headers: {
+          Authorization: userContext.userToken,
+        },
       });
       setRecipes((prevRecipes) => prevRecipes.filter((recipe) => recipe._id !== recipeId));
     } catch (error) {
@@ -53,7 +61,9 @@ const RecipeProvider = ({ children }) => {
   const updateRecipe = async (recipeData) => {
     try {
       await axios.put(`${backendUrl}/recipes/${selectedRecipe._id}`, recipeData, {
-        withCredentials: true,
+        headers: {
+          Authorization: userContext.userToken,
+        },
       });
       setRecipes((prevRecipes) => {
         return prevRecipes.map((recipe) => {
