@@ -28,7 +28,7 @@ export async function loginUserController(req, res) {
         const token = await createToken({ customerId: user.customerId, userId: user._id }, { expiresIn: '1h' });
        // console.log(token);
         const updatedUser = { ...user, token:token}
-        return res.status(200).cookie('jwt', token, { httpOnly: true }).send(updatedUser);
+        return res.status(200).cookie('accessToken', token, { httpOnly: true }).send(updatedUser);
       }
       return res.status(404).json({ msg: 'User not found!' });
     }
