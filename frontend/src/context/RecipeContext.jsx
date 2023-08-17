@@ -15,7 +15,7 @@ const RecipeProvider = ({ children }) => {
 
   useEffect(() => {
     fetchRecipes();
-  }, [recipes]);
+  }, []);
 
   useEffect(() => {
     if (userContext.userToken) {
